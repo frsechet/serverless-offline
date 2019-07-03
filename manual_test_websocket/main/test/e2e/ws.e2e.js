@@ -375,7 +375,7 @@ describe('serverless', () => {
       await createClient();
       const c2 = await createClient();
       const url = new URL(endpoint);
-      const signature = { service: 'execute-api', host: url.host, path: `${url.pathname}/@connections/${c2.id}`, method: 'DELETE', body: 'Hello World!', headers: { 'Content-Type': 'text/plain'/* 'application/text' */ } };
+      const signature = { service: 'execute-api', host: url.host, path: `${url.pathname}/@connections/${c2.id}`, method: 'DELETE', headers: { 'Content-Type': 'text/plain'/* 'application/text' */ } };
       aws4.sign(signature, { accessKeyId: cred.accessKeyId, secretAccessKey: cred.secretAccessKey });
       const res = await req.del(signature.path.replace(url.pathname, '')).set('X-Amz-Date', signature.headers['X-Amz-Date']).set('Authorization', signature.headers.Authorization).set('Content-Type', signature.headers['Content-Type']);
 
@@ -387,7 +387,7 @@ describe('serverless', () => {
       const cId = c.id;
       c.ws.close();
       const url = new URL(endpoint);
-      const signature = { service: 'execute-api', host: url.host, path: `${url.pathname}/@connections/${cId}`, method: 'DELETE', body: 'Hello World!', headers: { 'Content-Type': 'text/plain'/* 'application/text' */ } };
+      const signature = { service: 'execute-api', host: url.host, path: `${url.pathname}/@connections/${cId}`, method: 'DELETE', headers: { 'Content-Type': 'text/plain'/* 'application/text' */ } };
       aws4.sign(signature, { accessKeyId: cred.accessKeyId, secretAccessKey: cred.secretAccessKey });
       const res = await req.del(signature.path.replace(url.pathname, '')).set('X-Amz-Date', signature.headers['X-Amz-Date']).set('Authorization', signature.headers.Authorization).set('Content-Type', signature.headers['Content-Type']);
 
